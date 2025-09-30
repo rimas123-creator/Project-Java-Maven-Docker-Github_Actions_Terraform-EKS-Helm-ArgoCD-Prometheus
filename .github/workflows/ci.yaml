@@ -1,0 +1,17 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - feature/app-code
+    paths-ignore:
+      - 'helm/**'
+      - 'k8s/**'  
+
+jobs:
+  build-and-push-ecr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5  
