@@ -9,7 +9,7 @@ on:
       - 'k8s/**'  
 
 jobs:
-  build-and-push-github-artifact:
+  build-and-push-github-packages:
     runs-on: ubuntu-latest
 
     steps:
