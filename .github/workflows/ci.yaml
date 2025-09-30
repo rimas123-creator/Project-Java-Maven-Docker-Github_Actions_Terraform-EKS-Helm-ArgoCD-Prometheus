@@ -9,14 +9,14 @@ on:
       - 'k8s/**'  
 
 jobs:
-  build-and-push-ecr:
+  build-and-push-github-artifact:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      - name: Set up JDK 1.8
+      - name: Set up JDK 17
         uses: joschi/setup-jdk@v2
         with:
           java-version: '17'
