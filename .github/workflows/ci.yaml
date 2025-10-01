@@ -9,7 +9,7 @@ on:
       - 'k8s/**'  
 
 jobs:
-  build-and-push-github-packages:
+  build-and-push-jar-github-packages:
     runs-on: ubuntu-latest
 
     steps:
@@ -36,3 +36,49 @@ jobs:
         run: mvn -B -e deploy -s $GITHUB_WORKSPACE/.m2/settings.xml
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+  
+  build-and-push-docker-image-ecr:
+    runs-on: ubuntu-latest
+    needs: build-and-push-jar-github-packages
+
+    permissions:
+      # contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Download JAR
+        uses: actions/download-artifact@v3
+        with:
+          name: my-app-jar
+          path: target
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push Docker image
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          echo "Building Docker image..."
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker tag $REGISTRY/$REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:latest
+          echo "Pushing Docker image to ECR..."
+          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          docker push $REGISTRY/$REPOSITORY:latest
+
+      - name: Show pushed image info
+        run: |
+          echo "Image pushed: $REGISTRY/$REPOSITORY:$IMAGE_TAG"
+          echo "Also tagged as latest"
