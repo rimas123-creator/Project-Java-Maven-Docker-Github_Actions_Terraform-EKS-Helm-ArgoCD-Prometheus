@@ -67,18 +67,18 @@ jobs:
 
       - name: Build, tag, and push Docker image
         env:
-          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          # REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
           IMAGE_TAG: ${{github.run_id}}
         run: |
           echo "Building Docker image..."
-          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-          docker tag $REGISTRY/$REPOSITORY:$IMAGE_TAG $REGISTRY/$REPOSITORY:latest
+          docker build -t $REPOSITORY:$IMAGE_TAG .
+          docker tag $REPOSITORY:$IMAGE_TAG $REPOSITORY:latest
           echo "Pushing Docker image to ECR..."
-          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
-          docker push $REGISTRY/$REPOSITORY:latest
+          docker push $REPOSITORY:$IMAGE_TAG
+          docker push $REPOSITORY:latest
 
       - name: Show pushed image info
         run: |
-          echo "Image pushed: $REGISTRY/$REPOSITORY:$IMAGE_TAG"
+          echo "Image pushed: $REPOSITORY:$IMAGE_TAG"
           echo "Also tagged as latest"
