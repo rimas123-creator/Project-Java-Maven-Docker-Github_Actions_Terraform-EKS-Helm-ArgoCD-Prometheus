@@ -42,7 +42,7 @@ jobs:
     needs: build-and-push-jar-github-packages
 
     permissions:
-      contents: read
+      # contents: read
       id-token: write
 
     steps:
@@ -52,7 +52,7 @@ jobs:
       - name: Download JAR
         uses: actions/download-artifact@v4
         with:
-          name: my-app-jar
+          name: my-javaapp-jar
           path: target
 
       - name: Configure AWS credentials
