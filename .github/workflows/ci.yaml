@@ -42,7 +42,7 @@ jobs:
     needs: build-and-push-jar-github-packages
 
     permissions:
-      # contents: read
+      contents: read
       id-token: write
 
     steps:
