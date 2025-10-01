@@ -29,4 +29,9 @@ jobs:
         with:
           name: my-javaapp-jar
           path: target/*.jar
-          retention-days: 3  
+          retention-days: 3
+
+      - name: Publish to GitHub Packages Apache Maven
+        run: mvn deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}  
