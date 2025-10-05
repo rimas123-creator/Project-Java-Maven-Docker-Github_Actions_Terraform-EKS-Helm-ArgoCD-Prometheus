@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-javappp
+  name: {{ .Values.appName }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: my-javappp
+    app: {{ .Values.appName }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: my-javappp
+      app: {{ .Values.appName }}
   template:
     metadata:
       labels:
-        app: my-javappp
+        app: {{ .Values.appName }}
     spec:
       serviceAccountName: {{ .Values.serviceAccount.name }}
       containers:
-      - name: my-javappp
-        image: {{ .Values.image.repository }}:{{ .Values.image.tag  }}
+      - name: {{ .Values.appName }}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
-        - containerPort: 8080
+        - containerPort: {{ .Values.containerPort }}

@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: my-javappp
+  name: {{ .Values.appName }}
   namespace: {{ .Values.namespace }}
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
@@ -16,6 +16,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: my-javappp
+                name: {{ .Values.appName }}
                 port:
-                  number: 8080
+                  number: {{ .Values.service.port }}

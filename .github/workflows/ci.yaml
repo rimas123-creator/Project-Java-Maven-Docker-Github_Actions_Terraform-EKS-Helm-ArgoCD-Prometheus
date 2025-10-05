@@ -3,7 +3,8 @@ name: CI
 on:
   push:
     branches:
-      - feature/app-code
+      # - feature/app-code
+      - master
     paths-ignore:
       - 'helm/**'
       - 'k8s/**'  
