@@ -20,7 +20,7 @@
    <snapshotRepository>
      <id>github</id>
      <name>GitHub OWNER Apache Maven Packages</name>
-     <url>https://maven.pkg.github.com/rimas123-creator/Project-Java-Docker-Github_Actions_Terraform-EKS-Helm-ArgoCD-Prometheus</url>
+     <url>https://maven.pkg.github.com/rimas123-creator/Project-Java-Maven-Docker-Github_Actions_Terraform-EKS-Helm-ArgoCD-Prometheus</url>
    </snapshotRepository>
   </distributionManagement>
 
