@@ -2,11 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-javappp
-  namespace: dev
+  namespace: {{ .Values.namespace }}
   labels:
     app: my-javappp
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: my-javappp
@@ -15,10 +15,10 @@ spec:
       labels:
         app: my-javappp
     spec:
-      serviceAccountName: ecr-serviceaccount
+      serviceAccountName: {{ .Values.serviceAccount.name }}
       containers:
       - name: my-javappp
-        image: my-app:latest
-        imagePullPolicy: IfNotPresent
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag  }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: 8080
