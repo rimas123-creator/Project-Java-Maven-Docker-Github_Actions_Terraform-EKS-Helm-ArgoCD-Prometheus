@@ -1,10 +1,10 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - master
-      # - feature/app-code
+  # push:
+  #   branches:
+  #     - master
+  #     # - feature/app-code
   pull_request:
     branches:
       - master
