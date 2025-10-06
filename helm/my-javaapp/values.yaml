@@ -15,7 +15,7 @@ image:
 # fullnameOverride: ""
 
 appName: my-java-app
-namespace: dev
+namespace: staging
 serviceAccount:
   name: ecr-serviceaccount
   roleArn: arn:aws:iam::692443664163:role/ECRPullRole
