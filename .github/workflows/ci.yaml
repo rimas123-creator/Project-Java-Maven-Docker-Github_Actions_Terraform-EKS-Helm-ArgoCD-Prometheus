@@ -3,11 +3,11 @@ name: CI
 on:
   push:
     branches:
-      # - feature/app-code
       - master
-    paths-ignore:
-      - 'helm/**'
-      - 'k8s/**'  
+      # - feature/app-code
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build-and-push-jar-github-packages:
