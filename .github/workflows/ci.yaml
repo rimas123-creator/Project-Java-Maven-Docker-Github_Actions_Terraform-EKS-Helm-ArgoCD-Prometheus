@@ -1,13 +1,13 @@
 name: CI
 
 on:
-  # push:
-  #   branches:
-  #     - master
-  #     # - feature/app-code
-  pull_request:
+  push:
     branches:
       - master
+      # - feature/app-code
+  # pull_request:
+  #   branches:
+  #     - master
     paths-ignore:
       - 'helm/**'
       - 'k8s/**'
