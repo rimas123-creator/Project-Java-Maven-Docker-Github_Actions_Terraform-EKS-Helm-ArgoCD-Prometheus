@@ -18,7 +18,7 @@ appName: my-java-app
 namespace: staging
 serviceAccount:
   name: ecr-serviceaccount
-  roleArn: arn:aws:iam::692443664163:role/ECRPullRole
+  roleArn: arn:aws:iam::692443664163:role/EKS-ECR-PullRole
 
 # podAnnotations: {}
 # podLabels: {}
