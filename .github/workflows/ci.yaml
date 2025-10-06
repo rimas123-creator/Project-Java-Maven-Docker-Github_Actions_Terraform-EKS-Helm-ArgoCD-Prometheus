@@ -4,7 +4,7 @@ on:
   push:
     branches:
       # - feature/app-code
-      - master
+      - main
     paths-ignore:
       - 'helm/**'
       - 'k8s/**'  
