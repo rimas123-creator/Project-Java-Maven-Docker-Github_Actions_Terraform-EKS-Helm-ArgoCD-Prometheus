@@ -5,7 +5,7 @@ resource "aws_vpc" "main" {
 
   tags = {
     Name                                        = "${terraform.workspace}-${var.cluster_name}-vpc"
-    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "kubernetes.io/cluster/${terraform.workspace}-${var.cluster_name}" = "shared"
   }
 }
 
@@ -17,7 +17,7 @@ resource "aws_subnet" "private" {
 
   tags = {
     Name                                        = "${terraform.workspace}-${var.cluster_name}-private-${count.index + 1}"
-    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "kubernetes.io/cluster/${terraform.workspace}-${var.cluster_name}" = "shared"
     "kubernetes.io/role/internal-elb"           = "1"
   }
 }
@@ -32,7 +32,7 @@ resource "aws_subnet" "public" {
 
   tags = {
     Name                                        = "${terraform.workspace}-${var.cluster_name}-public-${count.index + 1}"
-    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
+    "kubernetes.io/cluster/${terraform.workspace}-${var.cluster_name}" = "shared"
     "kubernetes.io/role/elb"                    = "1"
   }
 }
